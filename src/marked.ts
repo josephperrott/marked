@@ -37,6 +37,28 @@ export function marked(src: string, opt?: MarkedOptions): string | Promise<strin
   return markedInstance.parse(src, opt);
 }
 
+/** 
+ * Convenience function to run marked in a syncronous mode regardless of default configuration.
+ * 
+ * @param src String of markdown source to be compiled
+ * @param options Optional hash of options
+ * @return String of compiled HTML.
+ */
+export function markedSync(src: string, options?: MarkedOptions): string { 
+  return marked(src, {...options, async: false}) as string;
+}
+
+/** 
+ * Convenience function to run marked in an asyncronous mode regardless of default configuration.
+ * 
+ * @param src String of markdown source to be compiled
+ * @param options Optional hash of options
+ * @return Promise of string of compiled HTML.
+ */
+export function markedAsync(src: string, options?: MarkedOptions): Promise<string> { 
+  return marked(src, {...options, async: true}) as Promise<string>;
+}
+
 /**
  * Sets the default options.
  *
